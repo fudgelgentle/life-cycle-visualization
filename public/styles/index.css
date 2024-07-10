@@ -3,6 +3,10 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+h2 {
+  margin-top: 5em;
+}
+
 
 /* box-shadow: [offset-x] [offset-y] [blur-radius] [spread-radius] [color]; */
 
