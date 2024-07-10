@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   handleHighlightText();
   recordCurrentMouseCoord();
   handleUpDownBtnBehavior();
+  handleDisplayBtn();
 
   function updateValue(change) {
     const upBtn = document.getElementById('up');
@@ -42,27 +43,25 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
   }
 
-  let displayBtn = document.querySelector('.display-chart-btn');
-  displayBtn.addEventListener('click', () => {
-    if (!chart) {
-      console.log('no chart detected. creating new chart');
-      displayChart2();
-    }
-    if (displayBtn.classList.contains('eye-off')) {
-      // displayBtn.classList.remove('eye-off');
-      // displayBtn.classList.add('eye-on');
-      replaceClass(displayBtn, 'eye-off', 'eye-on');
-      displayBtn.src = 'img/eye-on.png';
-      showChart();
-    } else {
-      // displayBtn.classList.remove('eye-on');
-      // displayBtn.classList.add('eye-off');
-      replaceClass(displayBtn, 'eye-on', 'eye-off');
-      displayBtn.src = 'img/eye-off.png';
-      hideChart();
-    }
-    activeUpDownBtn();
-  });
+  function handleDisplayBtn() {
+    let displayBtn = document.querySelector('.display-chart-btn');
+    displayBtn.addEventListener('click', () => {
+      if (!chart) {
+        displayChart2();
+      }
+      if (displayBtn.classList.contains('eye-off')) {
+        replaceClass(displayBtn, 'eye-off', 'eye-on');
+        displayBtn.src = 'img/eye-on.png';
+        showChart();
+      } else {
+        replaceClass(displayBtn, 'eye-on', 'eye-off');
+        displayBtn.src = 'img/eye-off.png';
+        hideChart();
+      }
+      activeUpDownBtn();
+    });
+  }
+
 
   /**
    * Removes the old class from the element and adds in the new class.
@@ -80,23 +79,15 @@ document.addEventListener('DOMContentLoaded', async function () {
     let specialText = document.querySelectorAll('.special-text-2');
     upDownBtn.forEach((btn) => {
       if (btn.classList.contains('active')) {
-        // btn.classList.add('inactive');
-        // btn.classList.remove('active');
         replaceClass(btn, 'active', 'inactive');
       } else {
-        // btn.classList.remove('inactive');
-        // btn.classList.add('active');
         replaceClass(btn, 'inactive', 'active');
       }
     });
     specialText.forEach((text) => {
       if (text.classList.contains('active-st')) {
-        // text.classList.add('inactive-st');
-        // text.classList.remove('active-st');
         replaceClass(text, 'active-st', 'inactive-st');
       } else {
-        // text.classList.remove('inactive-st');
-        // text.classList.add('active-st');
         replaceClass(text, 'inactive-st', 'active-st');
       }
     })
@@ -119,23 +110,12 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     document.addEventListener('selectionchange', (event) => {
       const selection = window.getSelection();
-
       const selectedText = selection.toString().trim();
-      console.log("selectedText:");
-      console.log(selectedText);
-      console.log("fullText:");
-      console.log(fullText);
-      console.log(selectedText == fullText);
-
       if (selectedText == fullText) {
-        console.log('fulltext = selectedtext');
         displayChart();
       }
     });
 
-    // text.addEventListener("mouseup", (event) => {
-    //   displayChart(event);
-    // });
     chartContainer.addEventListener("mouseleave", hideChart);
   }
 
@@ -204,17 +184,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     const ctx = document.getElementById("testChart");
     const chartConfig = await response.json();
     chart = new Chart(ctx, {
-      type: 'bar',
-      data: chartConfig.data,
-      options: chartConfig.options
-    });
-  }
-
-  async function getTestChart2() {
-    const response = await fetch("http://localhost:4000/chart-data");
-    const ctx = document.getElementById("testChart2");
-    const chartConfig = await response.json();
-    new Chart(ctx, {
       type: 'bar',
       data: chartConfig.data,
       options: chartConfig.options

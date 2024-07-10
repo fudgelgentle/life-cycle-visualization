@@ -19,7 +19,7 @@
     <p>This is an experimental page meant to test different designs of the LCA Visualizer</p>
 
     <!-- ! This is the old design -->
-    <div>
+    <section>
       <h2>S1 - Raw Materials Carbon Visualization [Design 1]</h2>
       <h3>Methods</h3>
       <h4>Fabrication of GFRV composite</h4>
@@ -54,10 +54,10 @@
       </div>
 
       <p>Glass fibre (0/90, 2 oz fibreglass fabric, Fibre Glast) was cut to size and stacked into a metal mould cavity. The mould was then left in a vacuum oven to preheat at 140 °C for 20 min. The treated mixture was then rapidly cast into the mould, followed by 1 min of degassing to eliminate air from the mould cavity and the matrix. The mould was then placed in a compression moulding heat press (Carver 5420) for 7 h with a constant temperature of 160 °C for thermal curing. A constant pressure of 1 MPa was applied to the mould for the first 5 h, and 4 MPa was applied for the last 2 h for post-curing. To avoid adhesion between GFRV and the metal mould, a sheet of PTFE was placed on the mould’s cavity plate and the core plate at the beginning of each fabrication process. After the thermal curing and mould cooling, the resulting GFRV of overall dimension 75 × 75 × 0.5 mm was collected and stored in a desiccant chamber for further characterization and manufacturing. We note that the size of the samples is due to the mould used and the same method could be scaled for larger samples.</p>
-    </div>
+    </section>
 
     <!-- ! This is the current design -->
-    <div>
+    <section>
       <h2>S1 - Raw Materials Carbon Visualization [Design 2]</h2>
       <div class="">
         The GFRV composite was constructed from two parts: vitrimer polymer and woven glass fibre sheets. The vitrimer polymer was prepared by mixing a stoichiometric ratio (1:1:5 mol% to the acid) of epoxy (EPON 828, Skygeek), adipic acid (Sigma Aldrich) and 1,5,7-triazabicyclo[4.4.0]dec-5-ene (TBD, Sigma Aldrich). The epoxy was poured into a beaker, then placed in a 100 °C heated bath and stirred at 100 r.p.m. for 10 min. The beaker was kept in the heated bath for the remainder of the mixing process.
@@ -85,16 +85,32 @@
       </div>
         minutes to thoroughly blend the epoxy and fully incorporate the catalyst into the mixture. Adipic acid was added last and stirred for an additional 7 min to ensure a homogeneous mixture. The beaker containing the mixture was then placed into a vacuum for 2 min for degassing.
       </div>
-    </div>
+    </section>
 
 
-    <div>
+    <section>
       <h2>S2 - Product Specs Carbon Visualization [Design 1]</h2>
+    </section>
+
+
+    <!-- ! Chart 1 -->
+    <div id="map">
+      <canvas id="testChart" width="480" height="320"></canvas>
+      <div class="slidercontainer">
+        <input
+          type="range"
+          min="1"
+          max="10"
+          value="1"
+          class="slider"
+          id="myRange"
+        />
+        <p>Duration: <span id="display"></span> minute(s)</p>
+      </div>
     </div>
 
-
-
-    <div id="map">
+    <!-- ! Chart 2 -->
+    <div id="map2">
       <canvas id="testChart" width="480" height="320"></canvas>
       <div class="slidercontainer">
         <input
