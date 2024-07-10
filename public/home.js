@@ -3,26 +3,149 @@ document.addEventListener('DOMContentLoaded', async function () {
   let chart;
   let selectionTimeout;
 
+  let mouseX;
+  let mouseY;
+  // Get the scroll offsets
+  let scrollX;
+  let scrollY;
+
   handleSlider();
   handleDraggableText();
   handleHighlightText();
+  recordCurrentMouseCoord();
+  handleUpDownBtnBehavior();
+
+  function updateValue(change) {
+    const upBtn = document.getElementById('up');
+    const downBtn = document.getElementById('down');
+    if (upBtn.classList.contains('inactive') || downBtn.classList.contains('inactive')) {
+      return;
+    }
+    const parameter = document.getElementById('parameter-2');
+    const display = document.getElementById('display');
+    display.innerText = parseInt(parameter.innerText);
+
+    const newValue = parseInt(parameter.innerText) + change;
+    parameter.innerText = newValue;
+    display.innerText = newValue;
+    updateChartData(chart, newValue);
+  }
+
+  function handleUpDownBtnBehavior() {
+    const upBtn = document.getElementById('up');
+    const downBtn = document.getElementById('down');
+    upBtn.addEventListener('click', () => {
+      updateValue(1);
+    });
+    downBtn.addEventListener('click', () => {
+      updateValue(-1);
+    });
+  }
+
+  let displayBtn = document.querySelector('.display-chart-btn');
+  displayBtn.addEventListener('click', () => {
+    if (!chart) {
+      console.log('no chart detected. creating new chart');
+      displayChart2();
+    }
+    if (displayBtn.classList.contains('eye-off')) {
+      // displayBtn.classList.remove('eye-off');
+      // displayBtn.classList.add('eye-on');
+      replaceClass(displayBtn, 'eye-off', 'eye-on');
+      displayBtn.src = 'img/eye-on.png';
+      showChart();
+    } else {
+      // displayBtn.classList.remove('eye-on');
+      // displayBtn.classList.add('eye-off');
+      replaceClass(displayBtn, 'eye-on', 'eye-off');
+      displayBtn.src = 'img/eye-off.png';
+      hideChart();
+    }
+    activeUpDownBtn();
+  });
+
+  /**
+   * Removes the old class from the element and adds in the new class.
+   * @param {HTMLElement} element the target html element
+   * @param {String} oldClass the class to be removed
+   * @param {String} newClass the class to be added
+   */
+  function replaceClass(element, oldClass, newClass) {
+    element.classList.remove(oldClass);
+    element.classList.add(newClass);
+  }
+
+  function activeUpDownBtn() {
+    const upDownBtn = document.querySelectorAll('.up-down-btn');
+    let specialText = document.querySelectorAll('.special-text-2');
+    upDownBtn.forEach((btn) => {
+      if (btn.classList.contains('active')) {
+        // btn.classList.add('inactive');
+        // btn.classList.remove('active');
+        replaceClass(btn, 'active', 'inactive');
+      } else {
+        // btn.classList.remove('inactive');
+        // btn.classList.add('active');
+        replaceClass(btn, 'inactive', 'active');
+      }
+    });
+    specialText.forEach((text) => {
+      if (text.classList.contains('active-st')) {
+        // text.classList.add('inactive-st');
+        // text.classList.remove('active-st');
+        replaceClass(text, 'active-st', 'inactive-st');
+      } else {
+        // text.classList.remove('inactive-st');
+        // text.classList.add('active-st');
+        replaceClass(text, 'inactive-st', 'active-st');
+      }
+    })
+  }
+
+  // Records the current coordinate of the mouse.
+  function recordCurrentMouseCoord() {
+    document.addEventListener('mousemove', function(event) {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+
+      scrollX = window.scrollX;
+      scrollY = window.scrollY;
+    });
+  }
 
   function handleHighlightText() {
     let text = document.getElementById("highlight-text");
+    const fullText = text.innerText;
 
-    text.addEventListener("mouseup", (event) => {
-      displayChart(event);
+    document.addEventListener('selectionchange', (event) => {
+      const selection = window.getSelection();
+
+      const selectedText = selection.toString().trim();
+      console.log("selectedText:");
+      console.log(selectedText);
+      console.log("fullText:");
+      console.log(fullText);
+      console.log(selectedText == fullText);
+
+      if (selectedText == fullText) {
+        console.log('fulltext = selectedtext');
+        displayChart();
+      }
     });
+
+    // text.addEventListener("mouseup", (event) => {
+    //   displayChart(event);
+    // });
     chartContainer.addEventListener("mouseleave", hideChart);
   }
 
   function handleDraggableText() {
     let startX;
     let isDragging = false;
-    let tenMinText = document.getElementById("ten-minute");
-    let initialValue = 10;
+    let parameterText = document.getElementById("parameter");
+    let initialValue = parseInt(parameterText.innerText);
 
-    tenMinText.addEventListener("mousedown", function (event) {
+    parameterText.addEventListener("mousedown", function (event) {
       startX = event.clientX;
       isDragging = true;
     });
@@ -37,16 +160,17 @@ document.addEventListener('DOMContentLoaded', async function () {
 
       let canvas = document.getElementById('testChart');
       let chart = Chart.getChart(canvas);
-      updateChartData(chart, newValue);
-
-      tenMinText.textContent = newValue + " min";
+      if (chart) {
+        updateChartData(chart, newValue);
+      }
+      parameterText.textContent = newValue + " min";
     });
 
     document.addEventListener('mouseup', function () {
       if (isDragging) {
         isDragging = false;
         // Update initialValue to the current displayed value for the next drag
-        initialValue = parseInt(tenMinText.textContent, 10);
+        initialValue = parseInt(parameterText.textContent);
       }
     });
   }
@@ -79,25 +203,52 @@ document.addEventListener('DOMContentLoaded', async function () {
     const response = await fetch("http://localhost:4000/chart-data");
     const ctx = document.getElementById("testChart");
     const chartConfig = await response.json();
-      chart = new Chart(ctx, {
-        type: 'bar',
-        data: chartConfig.data,
-        options: chartConfig.options
-      });
+    chart = new Chart(ctx, {
+      type: 'bar',
+      data: chartConfig.data,
+      options: chartConfig.options
+    });
+  }
+
+  async function getTestChart2() {
+    const response = await fetch("http://localhost:4000/chart-data");
+    const ctx = document.getElementById("testChart2");
+    const chartConfig = await response.json();
+    new Chart(ctx, {
+      type: 'bar',
+      data: chartConfig.data,
+      options: chartConfig.options
+    });
   }
 
   function hideChart() {
     chartContainer.classList.remove("visible");
-    clearTimeout(selectionTimeout);
   }
 
-  function displayChart(event) {
+  function showChart() {
+    chartContainer.classList.add("visible");
+  }
+
+  function displayChart2() {
+    clearTimeout(selectionTimeout);
+    selectionTimeout = setTimeout(async function () {
+      chartContainer.style.top = `${mouseY + scrollY + 20}px`;
+      chartContainer.style.left = `${mouseX + scrollX + 20}px`;
+      chartContainer.classList.add("visible");
+      if (!chart) {
+        await getTestChart();
+      }
+    }, 100);
+  }
+
+  // Uses the current x and y coordinate of the mouse and displays a chart below it.
+  function displayChart() {
     clearTimeout(selectionTimeout);
     selectionTimeout = setTimeout(async function () {
       const selection = window.getSelection().toString().trim();
       if (selection) {
-        chartContainer.style.top = `${event.pageY + 10}px`;
-        chartContainer.style.left = `${event.pageX + 10}px`;
+        chartContainer.style.top = `${mouseY + scrollY + 10}px`;
+        chartContainer.style.left = `${mouseX + scrollX + 10}px`;
         chartContainer.classList.add("visible");
         if (!chart) {
           await getTestChart();
@@ -107,4 +258,5 @@ document.addEventListener('DOMContentLoaded', async function () {
       }
     }, 100);
   }
+
 });

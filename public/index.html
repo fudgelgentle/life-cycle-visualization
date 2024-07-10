@@ -15,17 +15,83 @@
   </head>
   <body>
 
-    <p class="text" id="highlight-text">
-      epoxy (EPON 828, Skygeek), adipic acid (Sigma Aldrich) and
-      1,5,7-triazabicyclo[4.4.0]dec-5-ene (TBD, Sigma Aldrich). <br />The epoxy
-      was poured into a beaker, then placed in a 100 °C heated bath and stirred
-      at 100 r.p.m. for <span id="ten-minute">10 min</span>.
-    </p>
+    <h1>Life Cycle Visualization</h1>
+
+    <!-- ! This is the old design -->
+    <div>
+      <h2>Article 1 [old design]</h2>
+      <h3>Methods</h3>
+      <h4>Fabrication of GFRV composite</h4>
+      <p>The GFRV composite was constructed from two parts: vitrimer polymer and woven glass fibre sheets. The vitrimer polymer was prepared by mixing a stoichiometric ratio (1:1:5 mol% to the acid) of</p>
+      <p class="instructions">highlight the bolded sentence below to see the chart:</p>
+      <p id="highlight-text"><b>
+          epoxy (EPON 828, Skygeek), adipic acid (Sigma Aldrich) and
+          1,5,7-triazabicyclo[4.4.0]dec-5-ene (TBD, Sigma Aldrich). <br />The epoxy
+          was poured into a beaker, then placed in a 100 °C heated bath and stirred
+          at 100 r.p.m. for <span id="parameter">1 min</span>.
+      </b></p>
+      <div class="full-text-container">
+        <div class="special-text-container">
+          The beaker was kept in the heated bath for the remainder of the mixing process. Subsequently, transesterification catalyst TBD was added into the beaker and stirred at 600 r.p.m. for
+            <div class="special-text">
+              <div class="align-center">
+                5 min.
+                <img src="img/lca-48.png" class="icon-16 show-viz-btn">
+              </div>
+              <input
+                type="range"
+                min="1"
+                max="10"
+                value="1"
+                class="special-text-slider"
+              />
+            </div>
+          </div>
+          to thoroughly blend the epoxy and fully incorporate the catalyst into the mixture.
+        </div>
+        Adipic acid was added last and stirred for an additional 7 min to ensure a homogeneous mixture. The beaker containing the mixture was then placed into a vacuum for 2 min for degassing.
+      </div>
+
+      <p>Glass fibre (0/90, 2 oz fibreglass fabric, Fibre Glast) was cut to size and stacked into a metal mould cavity. The mould was then left in a vacuum oven to preheat at 140 °C for 20 min. The treated mixture was then rapidly cast into the mould, followed by 1 min of degassing to eliminate air from the mould cavity and the matrix. The mould was then placed in a compression moulding heat press (Carver 5420) for 7 h with a constant temperature of 160 °C for thermal curing. A constant pressure of 1 MPa was applied to the mould for the first 5 h, and 4 MPa was applied for the last 2 h for post-curing. To avoid adhesion between GFRV and the metal mould, a sheet of PTFE was placed on the mould’s cavity plate and the core plate at the beginning of each fabrication process. After the thermal curing and mould cooling, the resulting GFRV of overall dimension 75 × 75 × 0.5 mm was collected and stored in a desiccant chamber for further characterization and manufacturing. We note that the size of the samples is due to the mould used and the same method could be scaled for larger samples.</p>
+    </div>
+
+    <!-- ! This is the current design -->
+    <div>
+      <h2>Article 2 [current design]</h2>
+
+      <div class="">
+        The GFRV composite was constructed from two parts: vitrimer polymer and woven glass fibre sheets. The vitrimer polymer was prepared by mixing a stoichiometric ratio (1:1:5 mol% to the acid) of epoxy (EPON 828, Skygeek), adipic acid (Sigma Aldrich) and 1,5,7-triazabicyclo[4.4.0]dec-5-ene (TBD, Sigma Aldrich). The epoxy was poured into a beaker, then placed in a 100 °C heated bath and stirred at 100 r.p.m. for 10 min. The beaker was kept in the heated bath for the remainder of the mixing process.
+        <p>Subsequently, transesterification catalyst TBD was added into the beaker and stirred at 600 r.p.m. for</p>
+        <p class="instructions">interact with the component below to see the chart:</p>
+      <div class="special-text-container-2">
+        <div class="special-text-2 inactive-st">
+          <span id="parameter-2">5</span>
+          <div class="up-down-btn-container">
+            <div class="inactive up-down-btn" id="up">
+              <svg width="9" height="7" viewBox="0 0 9 7" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.60595 1.24256C3.99375 0.781809 4.7032 0.781808 5.091 1.24256L8.00777 4.70806C8.53906 5.3393 8.09032 6.30353 7.26525 6.30353L1.4317 6.30353C0.606637 6.30353 0.157892 5.33931 0.689181 4.70807L3.60595 1.24256Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="inactive up-down-btn" id="down">
+              <svg width="9" height="7" viewBox="0 0 9 7" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.09107 5.74914C4.70327 6.20989 3.99382 6.20989 3.60602 5.74914L0.689251 2.28363C0.157962 1.65239 0.606707 0.688168 1.43177 0.688168L7.26532 0.688168C8.09039 0.688168 8.53913 1.65239 8.00784 2.28363L5.09107 5.74914Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <!-- <img src="img/up-btn.png" class="em-small up-down-btn inactive">
+            <img src="img/down-btn.png" class="em-small up-down-btn inactive"> -->
+          </div>
+        </div>
+        <div title="Click to display CO2 emissions"><img src="img/eye-off.png" class="display-chart-btn eye-off em-regular"></div>
+      </div>
+        minutes to thoroughly blend the epoxy and fully incorporate the catalyst into the mixture. Adipic acid was added last and stirred for an additional 7 min to ensure a homogeneous mixture. The beaker containing the mixture was then placed into a vacuum for 2 min for degassing.
+      </div>
+    </div>
+
 
 
     <div id="map">
       <canvas id="testChart" width="480" height="320"></canvas>
-      <div class="slidecontainer">
+      <div class="slidercontainer">
         <input
           type="range"
           min="1"
@@ -39,9 +105,17 @@
     </div>
 
     <!-- <canvas id="myChart" width="600" height="400"></canvas> -->
-    <!-- <div class="myMap">
-      <canvas id="myChart" width="600" height="400"></canvas>
+    <!-- <br><br><br>
+    <h2>This is a test chart for development purposes</h2>
+    <div class="myMap">
+      <canvas id="testChart2" width="600" height="400"></canvas>
     </div> -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <script type="module" src="home.js"></script>
   </body>

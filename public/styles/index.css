@@ -1,7 +1,10 @@
 body {
-  padding: 20px;
+  padding: 50px;
   font-family: "Inter", sans-serif;
 }
+
+
+/* box-shadow: [offset-x] [offset-y] [blur-radius] [spread-radius] [color]; */
 
 #map {
   position: absolute;
@@ -22,24 +25,166 @@ body {
   pointer-events: auto;
 }
 
-.text {
-  font-size: 16px;
-}
-
 #testChart, .myMap {
   max-width: 600px;
   max-height: 400px;
   margin-bottom: 20px;
 }
 
-.slidecontainer {
+.slidercontainer {
   width: 100%;
 }
 
-#ten-minute {
+#parameter {
   cursor: ew-resize;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
   text-decoration: underline dotted;
 }
+
+.special-text-container, .special-text {
+  display: inline;
+}
+
+.special-text {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.special-text-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  max-width: 100px;
+  height: 8px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+  opacity: 0.8;
+  transition: opacity .2s;
+  margin-top: 10px;
+}
+
+.show-viz-btn {
+  border-radius: 3px;
+  margin-left: 5px;
+  /* box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25); */
+  border: 1px solid rgba(130, 130, 130, 0.25);
+  padding: 5px;
+}
+
+/* Styles for the slider thumb */
+.special-text-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #52B788;
+  cursor: pointer;
+  border: none;
+}
+
+.align-center {
+  display: flex;
+  align-items: center;
+}
+
+.instructions {
+  color: rgb(63, 113, 222);
+  font-style: italic;
+}
+
+#highlight-text {
+  color: #023047;
+}
+
+
+/* ! For article 2 designs only */
+.special-text-container-2 {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  column-gap: 5px;
+}
+.special-text-2 {
+  display: flex;
+  outline: 2px solid #39805F;
+  border-radius: 5px;
+  /* top, right, bottom, left */
+  padding: 5px 5px 5px 10px;
+  margin: 3px;
+  align-items: center;
+  gap: 10px;
+}
+.eye-off, .eye-on {
+  color: #39805F;
+  padding: 5px;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.eye-off {
+  background-color: white;
+}
+.eye-on {
+  background-color: #C2E4D5;
+}
+.up-down-btn-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+}
+.up-down-btn {
+  padding: 0px 6px 0px 6px;
+  box-shadow: 0px 0.5px 3px 0px rgba(0, 0, 0, 0.25);
+}
+.up-down-btn-container .up-down-btn svg {
+  width: 0.7em;
+  height: 0.7em;
+}
+.icon-16 {
+  width: 16px;
+  height: 16px;
+}
+.icon-20 {
+  width: 20px;
+  height: 20px;
+}
+.icon-24 {
+  width: 24px;
+  height: 24px;
+}
+.em-small {
+  width: 0.7em;
+  height: 0.7em;
+}
+.em-regular {
+  width: 1em;
+  height: 1em;
+}
+.inactive {
+  cursor: not-allowed;
+  background-color: #F5F5F5;
+  color: grey;
+}
+.active {
+  cursor: pointer;
+  background-color: white;
+  color: #39805F;
+}
+.active:hover {
+  background-color: #ddf2e8;
+  transition: 0.5s all;
+}
+.inactive-st {
+  background-color: #F5F5F5;
+}
+.active-st {
+  background-color: #F2FFF9;
+}
+/* ! For article 2 designs only */
