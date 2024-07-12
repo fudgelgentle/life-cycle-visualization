@@ -162,14 +162,6 @@ li {
   margin-top: 10px;
 }
 
-.capacity {
-  display: flex;
-}
-.display2 {
-  padding: 20px;
-  border: 1px solid black;
-}
-
 .from-to {
   margin-top: 10px;
   padding: 10px;
@@ -208,6 +200,22 @@ li {
   border: none;
   padding: none;
   cursor: pointer;
+}
+
+#capacityButtons {
+  display: flex;
+}
+
+.capacity {
+  padding: 20px;
+  border: 1px solid black;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+#button-128.active, #button-256.active, #button-512.active, #button-1000.active {
+  background-color: rgb(82, 183, 136, 0.5);
+  color: black;
 }
 
 

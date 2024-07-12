@@ -18,6 +18,18 @@ document.addEventListener('DOMContentLoaded', async function () {
   handleUpDownBtnBehavior();
   handleDisplayBtn();
   handleCarbonShippingBtn();
+  handleCapacityBtn();
+
+  function handleCapacityBtn() {
+    var capacityList = document.querySelectorAll('#capacityButtons p');
+    for (let i = 0; i < capacityList.length; i++) {
+      var button = capacityList[i];
+      button.addEventListener('click', (e) => {
+        setActiveButton(e.target);
+        updateHorizontalChartData(chart2, (i + 1));
+      })
+    }
+  }
 
   function handleCarbonShippingBtn() {
     const analyzeCarbonBtn = document.querySelector('.analyze-carbon');
@@ -131,7 +143,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         displayChart();
       }
       if (isCapacityText(selectedText)) {
-        console.log('displaying horizontal chart');
         displayHorizontalChart();
       }
     });
@@ -141,15 +152,49 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   function isCapacityText(selectedText) {
-    console.log('selectedText = ' + selectedText.toString());
     const capacityText = ['128 GB', '256 GB', '512 GB', '1 TB'];
-    if (capacityText.indexOf(selectedText.toString()) > -1) {
-      console.log('capacity text found');
-      return true;
+    for (let i = 0; i < capacityText.length; i++) {
+      if (capacityText[i] === selectedText) {
+        switch (capacityText[i]) {
+          case '128 GB':
+            setActiveButton(document.getElementById('button-128'));
+            break;
+          case '256 GB':
+            setActiveButton(document.getElementById('button-256'));
+            break;
+          case '512 GB':
+            setActiveButton(document.getElementById('button-512'));
+            break;
+          case '1 TB':
+            setActiveButton(document.getElementById('button-1000'));
+            break;
+          default:
+            break;
+        }
+        return true;
+      }
     }
-    console.log('capacity text not found');
+
     return false;
   }
+
+  /**
+   * @param {HTMLElement} activeButton The current button that is active
+   */
+  function setActiveButton(activeButton) {
+    console.log('active button: ');
+    console.log(activeButton);
+    var capacityList = document.querySelectorAll('#capacityButtons p');
+    const activeId = activeButton.id;
+    capacityList.forEach((button) => {
+      if (button.id === activeId) {
+        button.classList.add('active');
+      } else {
+        button.classList.remove('active');
+      }
+    });
+  }
+
 
   function handleDraggableText() {
     let startX;
