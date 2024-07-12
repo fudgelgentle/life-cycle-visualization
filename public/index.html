@@ -7,34 +7,31 @@
     <link rel="stylesheet" href="styles/index.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lexend:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
 
     <h1>Life Cycle Visualization</h1>
-    <p>This is an experimental page meant to test different designs of the LCA Visualizer</p>
+    <p>This is an experimental page meant to test different designs of the LCA Visualizer.</p>
 
     <!-- ! This is the old design -->
-    <section>
-      <h2>S1 - Raw Materials Carbon Visualization [Design 1]</h2>
+    <section class="grey">
+      <h2>Raw Materials Carbon Visualization [Design 1]</h2>
       <h3>Methods</h3>
       <h4>Fabrication of GFRV composite</h4>
       <p>The GFRV composite was constructed from two parts: vitrimer polymer and woven glass fibre sheets. The vitrimer polymer was prepared by mixing a stoichiometric ratio (1:1:5 mol% to the acid) of</p>
-      <p class="instructions">highlight the bolded sentence below to see the chart:</p>
-      <p id="highlight-text"><b>
+      <p><span id="highlight-text"><b>
           epoxy (EPON 828, Skygeek), adipic acid (Sigma Aldrich) and
           1,5,7-triazabicyclo[4.4.0]dec-5-ene (TBD, Sigma Aldrich). <br />The epoxy
           was poured into a beaker, then placed in a 100 °C heated bath and stirred
-          at 100 r.p.m. for <span id="parameter">1 min</span>.
-      </b></p>
+          at 100 r.p.m. for <span id="parameter">1 min</span>.</b></span>
+          <img src="img/lca-128.png" class="icon-16 lca-hint" title="Highlight text to display CO2 emissions">
+      </p>
       <div class="full-text-container">
         <div class="special-text-container">
           The beaker was kept in the heated bath for the remainder of the mixing process. Subsequently, transesterification catalyst TBD was added into the beaker and stirred at 600 r.p.m. for
-            <div class="special-text">
+            <!-- <div class="special-text">
               <div class="align-center">
                 5 min.
                 <img src="img/lca-48.png" class="icon-16 show-viz-btn">
@@ -46,7 +43,7 @@
                 value="1"
                 class="special-text-slider"
               />
-            </div>
+            </div> -->
           </div>
           to thoroughly blend the epoxy and fully incorporate the catalyst into the mixture.
         </div>
@@ -57,12 +54,11 @@
     </section>
 
     <!-- ! This is the current design -->
-    <section>
-      <h2>S1 - Raw Materials Carbon Visualization [Design 2]</h2>
+    <section class="grey">
+      <h2>Raw Materials Carbon Visualization [Design 2]</h2>
       <div class="">
         The GFRV composite was constructed from two parts: vitrimer polymer and woven glass fibre sheets. The vitrimer polymer was prepared by mixing a stoichiometric ratio (1:1:5 mol% to the acid) of epoxy (EPON 828, Skygeek), adipic acid (Sigma Aldrich) and 1,5,7-triazabicyclo[4.4.0]dec-5-ene (TBD, Sigma Aldrich). The epoxy was poured into a beaker, then placed in a 100 °C heated bath and stirred at 100 r.p.m. for 10 min. The beaker was kept in the heated bath for the remainder of the mixing process.
         <p>Subsequently, transesterification catalyst TBD was added into the beaker and stirred at 600 r.p.m. for</p>
-        <p class="instructions">interact with the component below to see the chart:</p>
       <div class="special-text-container-2">
         <div class="special-text-2 inactive-st">
           <span id="parameter-2">5</span>
@@ -88,40 +84,111 @@
     </section>
 
 
-    <section>
-      <h2>S2 - Product Specs Carbon Visualization [Design 1]</h2>
+    <section class="black">
+      <h2>Product Specs Carbon Visualization [Design 1]</h2>
+      <br>
+      <h3>iPhone 15 Pro</h3>
+      <img src="img/iphone.jpg" title="Click to display CO2 emissions">
+      <br>
+      <br>
+      <h3>Finish</h3>
+      <p>Black Titanium, White Titanium, Blue Titanium, Natural Titanium</p>
+      <p>Titanium design</p>
+      <p>Ceramic Shield front</p>
+      <p>Textured matte glass back</p>
+      <br>
+      <h3>Capacity</h3>
+      <ul id="capacity-list">
+        <li>
+          128 GB
+          <img src="img/lca-128.png" class="icon-16 lca-hint" title="Highlight text to display CO2 emissions">
+        </li>
+        <li>
+          256 GB
+          <img src="img/lca-128.png" class="icon-16 lca-hint" title="Highlight text to display CO2 emissions">
+        </li>
+        <li>
+          512 GB
+          <img src="img/lca-128.png" class="icon-16 lca-hint" title="Highlight text to display CO2 emissions">
+        </li>
+        <li>
+          1 TB
+          <img src="img/lca-128.png" class="icon-16 lca-hint" title="Highlight text to display CO2 emissions">
+        </li>
+      </ul>
+    </section>
+
+    <section class="white">
+      <h2>Shipping Carbon Visualization</h2>
+      <br>
+      <h3>Calculate Shipping Rates</h3>
+      <div class="from-to">
+        <p><b>From:</b> Seattle, Washington, 98154, United States</p>
+      </div>
+      <div class="from-to">
+        <p><b>To:</b> Suginami City, Tokyo, 168-0063, Japan</p>
+      </div>
+      <br>
+      <h3>Packaging Details</h3>
+      <ul>
+        <li><b>Packaging: </b>FedEx Large Box</li>
+        <li><b>Packages:</b> 1</li>
+        <li><b>Package weight:</b> 100 kg</li>
+        <li><b>Dimensions:</b> 70 x 50 x 20 cm</li>
+      </ul>
+      <br>
+      <h3>Shipping dates</h3>
+      <div class="from-to">
+        <p><b>Arrive By:</b> 31 August, 2024</p>
+      </div>
+      <br>
+      <div class="shipping-carbon-container">
+        <button class="analyze-carbon">
+          Show Carbon Footprint
+        <img src="img/lca-128.png" class="icon-16 lca-hint">
+        </button>
+        <div class="transport-map">
+          <p><b>Tokyo -> Seattle</b></p>
+          <div>
+            <p>Estimated Carbon Emissions:</p>
+            <p class="dark-green">~3.66 kg CO2e</p>
+            <p class="dark-green">~2.88 kg CO2</p>
+          </div>
+          <button class="close-btn">
+            <svg class="icon-24" width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
     </section>
 
 
-    <!-- ! Chart 1 -->
+
     <div id="map">
       <canvas id="testChart" width="480" height="320"></canvas>
       <div class="slidercontainer">
-        <input
+        <!-- <input
           type="range"
           min="1"
           max="10"
-          value="1"
+          value="5"
           class="slider"
           id="myRange"
-        />
-        <p>Duration: <span id="display"></span> minute(s)</p>
+        /> -->
+        <p>Duration: <span id="display">5</span> minute(s)</p>
       </div>
     </div>
 
-    <!-- ! Chart 2 -->
     <div id="map2">
-      <canvas id="testChart" width="480" height="320"></canvas>
-      <div class="slidercontainer">
-        <input
-          type="range"
-          min="1"
-          max="10"
-          value="1"
-          class="slider"
-          id="myRange"
-        />
-        <p>Duration: <span id="display"></span> minute(s)</p>
+      <canvas id="yChart" width="480" height="320"></canvas>
+      <p>Capacity:</p>
+      <div class="capacity">
+        <p class="display2">128 GB</p>
+        <p class="display2">256 GB</p>
+        <p class="display2">512 GB</p>
+        <p class="display2">1 TB</p>
       </div>
     </div>
 

@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', async function () {
   let chartContainer = document.getElementById("map");
+  let chartContainer2 = document.getElementById("map2");
   let chart;
+  let chart2;
   let selectionTimeout;
 
   let mouseX;
@@ -9,12 +11,29 @@ document.addEventListener('DOMContentLoaded', async function () {
   let scrollX;
   let scrollY;
 
-  handleSlider();
+  // handleSlider();
   handleDraggableText();
   handleHighlightText();
   recordCurrentMouseCoord();
   handleUpDownBtnBehavior();
   handleDisplayBtn();
+  handleCarbonShippingBtn();
+
+  function handleCarbonShippingBtn() {
+    const analyzeCarbonBtn = document.querySelector('.analyze-carbon');
+    const transportMap = document.querySelector('.transport-map');
+    analyzeCarbonBtn.addEventListener('click', () => {
+      setTimeout(function () {
+        transportMap.style.top = `${50}px`;
+        transportMap.style.left = `${0}px`;
+        transportMap.classList.add("visible");
+      }, 100);
+    });
+    const closeBtn = document.querySelector('.close-btn');
+    closeBtn.addEventListener('click', () => {
+      transportMap.classList.remove("visible");
+    })
+  }
 
   function updateValue(change) {
     const upBtn = document.getElementById('up');
@@ -46,13 +65,10 @@ document.addEventListener('DOMContentLoaded', async function () {
   function handleDisplayBtn() {
     let displayBtn = document.querySelector('.display-chart-btn');
     displayBtn.addEventListener('click', () => {
-      if (!chart) {
-        displayChart2();
-      }
       if (displayBtn.classList.contains('eye-off')) {
         replaceClass(displayBtn, 'eye-off', 'eye-on');
         displayBtn.src = 'img/eye-on.png';
-        showChart();
+        displayChart2();
       } else {
         replaceClass(displayBtn, 'eye-on', 'eye-off');
         displayBtn.src = 'img/eye-off.png';
@@ -114,9 +130,25 @@ document.addEventListener('DOMContentLoaded', async function () {
       if (selectedText == fullText) {
         displayChart();
       }
+      if (isCapacityText(selectedText)) {
+        console.log('displaying horizontal chart');
+        displayHorizontalChart();
+      }
     });
 
     chartContainer.addEventListener("mouseleave", hideChart);
+    chartContainer2.addEventListener("mouseleave", hideChart2);
+  }
+
+  function isCapacityText(selectedText) {
+    console.log('selectedText = ' + selectedText.toString());
+    const capacityText = ['128 GB', '256 GB', '512 GB', '1 TB'];
+    if (capacityText.indexOf(selectedText.toString()) > -1) {
+      console.log('capacity text found');
+      return true;
+    }
+    console.log('capacity text not found');
+    return false;
   }
 
   function handleDraggableText() {
@@ -190,8 +222,76 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
   }
 
+  function getHorizontalChart(multiplier) {
+    const ctx = document.getElementById("yChart");
+    const chartData = {
+      labels: ['iPhone 12'],
+      datasets: [{
+        axis: 'y',
+        label: 'Carbon Footprint (kg CO2e)',
+        data: [6],
+        fill: false,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+        ],
+        borderColor: [
+          'rgb(255, 99, 132)',
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    const options = {
+      indexAxis: "y",
+      scales: {
+        x: {
+          beginAtZero: true,
+          min: 0,
+          max: 30,
+        },
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: "iPhone 12 Carboon Footprint Visualizr",
+        },
+      },
+    };
+
+    chart2 = new Chart(ctx, {
+      type: 'bar',
+      data: chartData,
+      options: options,
+    });
+  }
+
+  function updateHorizontalChartData(chart, multiplier) {
+    let data = [6];
+    let newData = data.map(val => val * multiplier);
+    const chartData = chart.data.datasets[0].data;
+    for (let i = 0; i < data.length; i++) {
+      chartData[i] = newData[i];
+    }
+    chart.update();
+  }
+
+  function displayHorizontalChart() {
+    setTimeout(function () {
+      chartContainer2.style.top = `${mouseY + scrollY + 20}px`;
+      chartContainer2.style.left = `${mouseX + scrollX + 20}px`;
+      chartContainer2.classList.add("visible");
+      if (!chart2) {
+        getHorizontalChart();
+      }
+    }, 100);
+  }
+
   function hideChart() {
     chartContainer.classList.remove("visible");
+  }
+
+  function hideChart2() {
+    chartContainer2.classList.remove("visible");
   }
 
   function showChart() {
